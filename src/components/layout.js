@@ -26,7 +26,7 @@ const Layout = ({ children, pageInfo }) => (
       }
     `}
     render={data => (
-      <IdentityContextProvider url="https://">
+      <IdentityContextProvider url="https://assessment-tool.netlify.app/">
         <Container fluid className="px-0 main">
           <Navbar pageInfo={pageInfo} />
           <Row noGutters>
