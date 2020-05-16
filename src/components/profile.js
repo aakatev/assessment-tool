@@ -2,7 +2,6 @@ import { Link } from "gatsby"
 import React from "react"
 import { useIdentityContext } from 'react-netlify-identity'
 
-
 const Profile = ({ toggleModal }) => {
   const identity = useIdentityContext()
   const name = (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.full_name) || 'Guest'

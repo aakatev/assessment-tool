@@ -6,6 +6,7 @@ import { IdentityModal } from 'react-netlify-identity-widget'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Profile from '../components/profile'
+import RouterGuard from '../components/routerGuard'
 
 import RouteSettings from '../components/routeSettings'
 import RouteToken from '../components/routeToken'
@@ -31,8 +32,8 @@ const DashboardPage = ({ location }) => {
       <h1>Dashboard</h1>
       <p>Welcome user!</p>
       <Router>
-        <RouteSettings path="/dashboard/settings" />
-        <RouteToken path="/dashboard/token" />
+        <RouterGuard component={RouteSettings} path="/dashboard/settings" />
+        <RouterGuard component={RouteToken} path="/dashboard/token" />
         <RouteLogin path="/dashboard/login" toggleModal={toggleModal} />
       </Router>
       <IdentityModal 
