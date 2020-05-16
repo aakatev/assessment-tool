@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import { useIdentityContext } from 'react-netlify-identity'
 
 
-const RouteLogin = () => {
+const RouteLogin = ({ toggleModal }) => {
   const identity = useIdentityContext()
 
   if(identity && identity.isLoggedIn) {
@@ -13,7 +13,7 @@ const RouteLogin = () => {
   return(
     <div>
       <h1>Please Log In</h1>
-      <button>Log In</button>
+      <button onClick={() => toggleModal(true)}>Log In</button>
     </div>
   )
 }
