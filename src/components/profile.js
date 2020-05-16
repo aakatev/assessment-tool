@@ -21,40 +21,43 @@ const Profile = ({ toggleModal }) => {
           padding: `1.45rem 1.0875rem`,
         }}
       > 
-      <Link
-        to="/dashboard/token"
-        style={{
-          color: `gray`,
-          textDecoration: `none`,
-          margin: '1rem'
-        }}
-        activeClassName="active"
-      >
-        API Token
-      </Link>
-      <Link
-        to="/dashboard/settings"
-        style={{
-          color: `gray`,
-          textDecoration: `none`,
-          margin: '1rem'
-        }}
-        activeClassName="active"
+        <Link
+          to="/dashboard/token"
+          style={{
+            color: `gray`,
+            textDecoration: `none`,
+            margin: '1rem'
+          }}
+          activeClassName="active"
         >
-          Settings
-      </Link>
-      <button
-        onClick={() => toggleModal(true)}
-        style={{
-          color: `gray`,
-          textDecoration: `none`,
-          margin: '1rem'
-        }}
-        activeClassName="active"
-      >
-        Logout
-      </button>
-      )}
+          API Token
+        </Link>
+        <Link
+          to="/dashboard/settings"
+          style={{
+            color: `gray`,
+            textDecoration: `none`,
+            margin: '1rem'
+          }}
+          activeClassName="active"
+          >
+            Settings
+        </Link>
+        {isLoggedIn &&
+          <button
+            onClick={() => toggleModal(true)}
+            style={{
+              color: `gray`,
+              textDecoration: `none`,
+              margin: '1rem',
+              cursor: 'pointer'
+              
+            }}
+            className="btn-logout"
+          >
+            Logout
+          </button>
+        }
       </nav>
     </div>
   )
