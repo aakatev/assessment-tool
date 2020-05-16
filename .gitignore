@@ -70,3 +70,5 @@ yarn-error.log
 
 
 tutorial.md
+# Local Netlify folder
+.netlify

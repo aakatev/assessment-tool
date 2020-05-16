@@ -1,6 +1,8 @@
-# Gatsby React Bootstrap Starter
+# Assessment Tool
 
-A GatsbyJS starter that includes
+Based on Gatsby Bootstrap Starter
+
+Includes: 
 
 - react-bootstrap
 - react-icons
