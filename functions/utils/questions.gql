@@ -1,0 +1,9 @@
+type Question {
+  text: String!
+  options: [String!]!
+  answer: String!
+}
+
+type Query {
+  allQuestions: [Question!]!
+}

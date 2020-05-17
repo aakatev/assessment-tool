@@ -1,70 +1,57 @@
-import React from "react"
-import { Row, Col, Container, ListGroup } from "react-bootstrap"
+import React, { useEffect, useState } from "react"
+import { Container } from "react-bootstrap"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Question from "../components/question"
+import axios from "axios"
 
-const IndexPage = () => (
-  <Layout pageInfo={{ pageName: "index" }}>
-    <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
-    <Container className="text-center">
-      <Row>
-        <Col>
-          <p>
-            This is a Gatsby Starter that I frequently use to get jump started
-            on quick website builds. It includes the following packages:
-          </p>
-        </Col>
-      </Row>
-      <Row className="justify-content-center my-3">
-        <Col md="6">
-          <ListGroup>
-            <ListGroup.Item
-              action
-              href="https://getbootstrap.com"
-              target="_blank"
-            >
-              Bootstrap
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://react-bootstrap.github.io/"
-              target="_blank"
-            >
-              react-bootstrap
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://react-icons.netlify.com"
-              target="_blank"
-            >
-              react-icons
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://www.gatsbyjs.org/packages/gatsby-plugin-sass/"
-              target="_blank"
-            >
-              gatsby-plugin-sass
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>
-            This starter also includes a navbar that sticks to the top of the
-            screen when the user scrolls past it, and a footer that stays at the
-            bottom of the screen.
-          </p>
-          <p>
-            For more documentation on these packages and how they work, please
-            refer to the pages linked in the list above.
-          </p>
-        </Col>
-      </Row>
-    </Container>
-  </Layout>
-)
+const STATUS = {
+  LOADING: 'loading',
+  LOADED: 'loaded'
+}
+
+const IndexPage = () => {
+  const [status, setStatus] = useState(STATUS.LOADING)
+  const [questions, setQuestions] = useState(null)
+
+  useEffect(() => {
+    let canceled = false
+    if(status !== STATUS.LOADING) return
+
+    axios('/api/get-all-questions').then(result => {
+      if(canceled === true) return
+
+      if(result.status !== 200) {
+        console.error('Error loading question!', result)
+        return
+      }
+      setQuestions(result.data.questions)
+      setStatus(STATUS.LOADED)
+    })
+
+    return () => { canceled = true }
+  }, [status])
+
+  return (
+    <Layout pageInfo={{ pageName: "index" }}>
+      <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
+      <Container className="text-center">
+        <h1>Questions</h1>
+        {questions? (
+          <>
+          {questions.map((question, index) => <Question index={index} text={question.text} options={question.options} answer={question.answer}  key={question._id}/>)}
+          </>
+        ) : (
+          <>
+            Loading questions...
+          </>
+        )}
+
+        
+      </Container>
+    </Layout>
+  )
+}
 
 export default IndexPage
