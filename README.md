@@ -6,4 +6,3 @@ Based on Gatsby Bootstrap Starter, which includes:
 - react-icons
 - sticky on scroll navbar
 - SASS compiler
-- basic layout
